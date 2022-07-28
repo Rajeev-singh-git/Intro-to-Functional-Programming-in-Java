@@ -12,8 +12,9 @@ public static void main(String[] args) {
 		printSpringCoursesInFunctional(courses);
 		System.out.println("Courses containing at least 4 letters");
 		printCoursesHavingAtLeastFourLetterInFunctional(courses);
+		System.out.println("No of Character of each course");
+		printNoOfCharOfEachCourse(courses);
 	}
-
 
 	private static void printAllCoursesInFunctional(List<String> courses) {
 	courses.stream()
@@ -31,6 +32,12 @@ public static void main(String[] args) {
 	 .filter(course-> course.length() >= 4)
 	 .forEach(System.out::println);
 		
+	}
+	
+	private static void printNoOfCharOfEachCourse(List<String> courses) {
+		courses.stream()
+		 .map(course -> course + " " +course.length())
+		 .forEach(System.out::println);
 	}
 
 
