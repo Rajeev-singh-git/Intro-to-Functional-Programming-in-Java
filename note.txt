@@ -2,7 +2,7 @@
 
   What we did?
 
-    Printed list of no using Structured Programming and then using Functional programming
+    Printed list of no using Structured Programming approach and then using Functional programming approach
 
 
   In Functional programming 
