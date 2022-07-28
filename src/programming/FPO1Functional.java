@@ -21,17 +21,11 @@ public class FPO1Functional {
 	private static void printAllEvenNumbersInFunctional(List<Integer> numbers) {
 		//Our focus is  =  What to do?
 		numbers.stream()
-	
-		.filter(FPO1Functional::isEven) //Filter - Only Allow even numbers. Bascically, we are saying "isEven" is the method to be called on each number
-		.forEach(System.out::println); //Method Reference
+		  .filter(number -> number%2 ==0)  //Lambda expression
+		  .forEach(System.out::println);   //Method Reference
 	}
 
 
-	private static boolean  isEven(int number) {
-		// TODO Auto-generated method stub
-		return number%2==0;
-	}
-	
 	
 
 }
