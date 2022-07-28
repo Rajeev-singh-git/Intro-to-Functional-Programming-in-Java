@@ -1,0 +1,17 @@
+*****************Commit = First Java Functional Program
+
+  What we did?
+
+    Printed list of no using Structured Programming and then using Functional programming
+
+
+  In Functional programming 
+
+         for each number we are calling print method, we are not calling print method directly
+		b/z it will immediately  execute the code. We want to define behavior we get  a number as input.
+		For defining, we use method reference.
+		
+		 What we are telling is?
+		 Take the numbers, convert it into stream and for each element do a print 
+		
+		FPO1Functional::print == Method Reference
