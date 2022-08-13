@@ -6,7 +6,7 @@ public class FP02Exercise {
 	
 	
 	public static void main(String[]args) {
-		List<Integer> numbers = List.of(1,2,3,4,5,6,7,8,9,0,11,18,12);
+		List<Integer> numbers = List.of(1,2,3,4,3,4,5,6,7,8,9,0,11,18,12);
 		
 		squareAndFindSum(numbers);
 		cubeAndFindSum(numbers);
