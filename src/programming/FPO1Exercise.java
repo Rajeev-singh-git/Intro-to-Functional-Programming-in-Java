@@ -1,6 +1,8 @@
 package programming;
 
+import java.util.Comparator;
 import java.util.List;
+
 
 public class FPO1Exercise {
 	
@@ -11,10 +13,24 @@ public static void main(String[] args) {
 		printCoursesHavingAtLeastFourLetterInFunctional(courses);
 		printNoOfCharOfEachCourse(courses);
 		sortAllCourses(courses);
+		sortCoursesReverseOrder(courses);
+		sortCoursesLengthWise(courses);
 	}
 
+	private static void sortCoursesLengthWise(List<String> courses) {
+		System.out.println("Course sorted according to length");
+	  courses.stream().sorted(Comparator.comparing(str -> str.length())).forEach(System.out::println);
+	
+}
+
+	private static void sortCoursesReverseOrder(List<String> courses) {
+		System.out.println("Course sorted in reverse order");
+		courses.stream().sorted(Comparator.reverseOrder()).forEach(System.out::println);
+	
+}
+
 	private static void sortAllCourses(List<String> courses) {
-	System.out.println("Course sorted alphabetically ");
+	System.out.println("Course sorted alphabetically");
 	courses.stream().sorted().forEach(System.out::println);
 	
 }
