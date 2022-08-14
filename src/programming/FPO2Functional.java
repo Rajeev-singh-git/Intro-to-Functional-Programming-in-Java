@@ -1,12 +1,17 @@
 package programming;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FPO2Functional {
 	
 	public static void main(String[]args) {
 	
 	List<Integer> numbers = List.of(12,13,14,12,14,18,16, 18,21);
+	List<Integer> doubleNumbers = doubleList(numbers);
+	 System.out.println(doubleNumbers);
+    List<Integer> filteredEvenNumbers = filteredEvenNumbersList (numbers);
+	 System.out.println(filteredEvenNumbers);
          int sum = addListFunctional(numbers);
          System.out.println("Sum of list is " +sum);
          printDistinctNumber(numbers);
@@ -14,6 +19,16 @@ public class FPO2Functional {
          sortDistinctNumbers(numbers);
 	}
 	
+	private static List<Integer> filteredEvenNumbersList(List<Integer> numbers) {
+		 System.out.println("Filtered even number list");
+		return numbers.stream().filter(n->n%2==0).collect(Collectors.toList());
+	}
+
+	private static List<Integer> doubleList(List<Integer> numbers) {
+		 System.out.println("Doule value of each  number in the list are");
+		 return  numbers.stream().map(n->n*2).collect(Collectors.toList());		
+	}
+
 	private static void sortDistinctNumbers(List<Integer> numbers) {
 		 System.out.println("Distinct Sorted  numbers are");
 		 numbers.stream().distinct().sorted().forEach(System.out::println);

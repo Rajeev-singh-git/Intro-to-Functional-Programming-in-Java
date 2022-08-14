@@ -2,12 +2,15 @@ package programming;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class FPO1Exercise {
 	
 public static void main(String[] args) {
 		List<String> courses = List.of("Spring", "Spring Boot", "API", "Microservices", "AWS", "Azure", "Docker", "Git", "PCF");
+		List<String> lengthOfCourses = listOfLengthOfCourses(courses );
+		System.out.println( lengthOfCourses);
 		printAllCoursesInFunctional(courses);
 		printSpringCoursesInFunctional(courses);
 		printCoursesHavingAtLeastFourLetterInFunctional(courses);
@@ -17,9 +20,14 @@ public static void main(String[] args) {
 		sortCoursesLengthWise(courses);
 	}
 
+	private static List<String> listOfLengthOfCourses(List<String> courses) {
+		System.out.println("List of length of all course titles");
+	return courses.stream().map(str-> str+ " " +str.length()).collect(Collectors.toList());
+}
+
 	private static void sortCoursesLengthWise(List<String> courses) {
 		System.out.println("Course sorted according to length");
-	  courses.stream().sorted(Comparator.comparing(str -> str.length())).forEach(System.out::println);
+	    courses.stream().sorted(Comparator.comparing(str -> str.length())).forEach(System.out::println);
 	
 }
 
@@ -37,7 +45,7 @@ public static void main(String[] args) {
 
 	private static void printAllCoursesInFunctional(List<String> courses) {
 	System.out.println("All Courses ");
-	courses.stream()
+	 courses.stream()
 	.forEach(System.out::println);
 	}
 
