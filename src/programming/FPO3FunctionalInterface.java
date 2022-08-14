@@ -22,7 +22,7 @@ public class FPO3FunctionalInterface {
 	public static void main(String[]args) {
 		List<Integer> numbers = List.of(12,13,14,15,16);
 		
-		Predicate<Integer> isEvenPredicate = x->x%2==0;
+		Predicate<Integer> isEvenPredicate = x->x%2==0; //Predicate only returns boolean as output
 		//Whenever we write single line of logic then in background Instance of predicate class with that logic 
 		//gets created our us, similar to below method.
 		Predicate<Integer> isEvenPredicate2 = new Predicate<Integer>() {
@@ -33,8 +33,8 @@ public class FPO3FunctionalInterface {
 			}
 		};
 		
-		Function<Integer, Integer> SquareFunction = x->x*x;
-		
+		Function<Integer, Integer> SquareFunction = x->x*x; //Function takes input and return output
+		Function<Integer, String> stringOutoutFunction = x->x+""; //here, it takes integer as input and String as output
 		Function<Integer, Integer> SquareFunction2 = new Function<Integer, Integer>(){
 
 			@Override
@@ -43,7 +43,7 @@ public class FPO3FunctionalInterface {
 			}
 		};
 		
-		Consumer<Integer> sysoutConsumer = System.out::println;
+		Consumer<Integer> sysoutConsumer = System.out::println;  //Consumer  takes input but does not return anything back
 		Consumer<Integer> sysoutConsumer2 = new Consumer<Integer>() {
 
 			@Override
