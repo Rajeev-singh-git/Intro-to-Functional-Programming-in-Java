@@ -73,20 +73,61 @@ public class FPO4CustomClass {
 	   Predicate<Course> reviewScoreGreaterThan90Predicate = course -> course.getReviewScore()>90;
 	   Predicate<Course> reviewScoreLessThan90Predicate = course -> course.getReviewScore()<90;
 	   
-	   System.out.println(courses.stream().allMatch(reviewScoreGreaterThan95Predicate));
-	   System.out.println(courses.stream().noneMatch(reviewScoreLessThan90Predicate));
-	   System.out.println(courses.stream().anyMatch(reviewScoreGreaterThan90Predicate));
+	   System.out.println(courses.stream().allMatch(reviewScoreGreaterThan95Predicate));  //true
+	   System.out.println(courses.stream().noneMatch(reviewScoreLessThan90Predicate));    //true
+	   System.out.println(courses.stream().anyMatch(reviewScoreGreaterThan90Predicate));  //true
 	   
-	   Comparator<Course> comparingByNoStudentsIncreasing =  Comparator.comparing(Course::getNoOfStudents);
-	   Comparator<Course> comparingByNoStudentsDecreasing =  Comparator.comparing(Course::getNoOfStudents).reversed();
+	   Comparator<Course> comparingByNoStudentsIncreasing =  Comparator.comparingInt(Course::getNoOfStudents);
+	   Comparator<Course> comparingByNoStudentsDecreasing =  Comparator.comparingInt(Course::getNoOfStudents).reversed();
 	   Comparator<Course> comparingByNoStudentsAndNoOfReviews = 
 			   Comparator.comparing(Course::getNoOfStudents).thenComparing(Course::getReviewScore).reversed();
+	   
+	   /* when comparing primitive type use specific method defined for them like for int  "comparingInt".
+	   Just using "comparing" method is not efficient as internally Autoboxing, Autounboxing happens */
 		
 	   
 	   System.out.println(courses.stream().sorted(comparingByNoStudentsIncreasing).collect(Collectors.toList()));
+	   //[Angular:18000:99, Spring:20000:98, Spring Boot:30000:96, API:30000:97, Git:85000:99, Azure:96000:100]
 	   System.out.println(courses.stream().sorted(comparingByNoStudentsDecreasing).collect(Collectors.toList()));
+	   //[Azure:96000:100, Git:85000:99, Spring Boot:30000:96, API:30000:97, Spring:20000:98, Angular:18000:99]
 	   System.out.println(courses.stream().sorted(comparingByNoStudentsAndNoOfReviews).collect(Collectors.toList()));
-
+	   //[Azure:96000:100, Git:85000:99, API:30000:97, Spring Boot:30000:96, Spring:20000:98, Angular:18000:99]
+	   
+	   System.out.println(
+			   courses.stream()
+			   .sorted(comparingByNoStudentsAndNoOfReviews)
+			   .limit(5) //It will limit the o/p to 5 only
+			   .collect(Collectors.toList()));
+	   //[Azure:96000:100, Git:85000:99, API:30000:97, Spring Boot:30000:96, Spring:20000:98]
+		
+	   System.out.println(
+			   courses.stream()
+			   .sorted(comparingByNoStudentsAndNoOfReviews)
+			   .skip(3) //It will skip first 3 O/P
+			   .collect(Collectors.toList()));
+	   //[Spring Boot:30000:96, Spring:20000:98, Angular:18000:99]
+	   
+	   System.out.println(
+			   courses.stream()
+			   .sorted(comparingByNoStudentsAndNoOfReviews)
+			   .skip(3) //It will skip first 3 O/P
+			   .limit(2) // and print next 2 O/p
+			   .collect(Collectors.toList()));
+	   //[Spring Boot:30000:96, Spring:20000:98]
+         
+	   System.out.println(courses);
+	   //[Spring:20000:98, Spring Boot:30000:96, API:30000:97, Angular:18000:99, Git:85000:99, Azure:96000:100]
+	   
+	
+	   System.out.println(courses.stream()
+	   	  .takeWhile(course -> course.getReviewScore()<100)//Return all the courses until  review is not greater than or equal to 100
+	       .collect(Collectors.toList()));
+      //[Spring:20000:98, Spring Boot:30000:96, API:30000:97, Angular:18000:99, Git:85000:99]
+	   
+	   System.out.println(courses.stream()
+			   	  .dropWhile(course -> course.getReviewScore()<99)//Until this condition is true it will skip all the elements,  
+			      .collect(Collectors.toList()));                 // after that will print everything
+	   
 	}
 
 }
