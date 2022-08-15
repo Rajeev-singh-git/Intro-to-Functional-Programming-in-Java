@@ -1,7 +1,9 @@
 package programming;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 class Course{
 	private String name;
@@ -61,8 +63,8 @@ public class FPO4CustomClass {
 	   List<Course> courses = List.of(
 				new Course("Spring","Framework", 98, 20000),
 				new Course("Spring Boot","Framework", 96, 30000),
-				new Course("API","Microservices", 97, 23000),
-				new Course("Angular","Frontend Framework", 94, 18000),
+				new Course("API","Microservices", 97, 30000),
+				new Course("Angular","Frontend Framework", 99, 18000),
 				new Course("Git","Cloud", 99, 85000),
 				new Course("Azure","Cloud", 100, 96000)
 			);
@@ -75,6 +77,15 @@ public class FPO4CustomClass {
 	   System.out.println(courses.stream().noneMatch(reviewScoreLessThan90Predicate));
 	   System.out.println(courses.stream().anyMatch(reviewScoreGreaterThan90Predicate));
 	   
+	   Comparator<Course> comparingByNoStudentsIncreasing =  Comparator.comparing(Course::getNoOfStudents);
+	   Comparator<Course> comparingByNoStudentsDecreasing =  Comparator.comparing(Course::getNoOfStudents).reversed();
+	   Comparator<Course> comparingByNoStudentsAndNoOfReviews = 
+			   Comparator.comparing(Course::getNoOfStudents).thenComparing(Course::getReviewScore).reversed();
+		
+	   
+	   System.out.println(courses.stream().sorted(comparingByNoStudentsIncreasing).collect(Collectors.toList()));
+	   System.out.println(courses.stream().sorted(comparingByNoStudentsDecreasing).collect(Collectors.toList()));
+	   System.out.println(courses.stream().sorted(comparingByNoStudentsAndNoOfReviews).collect(Collectors.toList()));
 
 	}
 
