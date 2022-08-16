@@ -161,6 +161,35 @@ public class FPO4CustomClass {
 		        .findAny()
 		        );
 	   
+	   //Optional[Spring:20000:98]  //can return any calue which satistfy filter condition
+	   
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .mapToInt(Course::getNoOfStudents) // for primitive, preferred to use "mapToInt" than "map".
+                .sum());
+	   //279000
+	   
+
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .mapToInt(Course::getNoOfStudents) 
+                .average());
+	   //OptionalDouble[46500.0]
+	   
+	   
+
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .mapToInt(Course::getNoOfStudents) 
+                .count());
+	   //6
+	   
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .mapToInt(Course::getNoOfStudents) 
+               .max());
+	   
+	   
 	}
 
 }
