@@ -97,6 +97,35 @@ jshell> IntStream.iterate(2, e-> e*2).limit(10).peek(System.out::println).sum()
 1024
 $7 ==> 2046
 
+
 jshell> IntStream.iterate(2, e-> e*2).limit(10).boxed().collect(Collectors.toList()) //
 $8 ==> [2, 4, 8, 16, 32, 64, 128, 256, 512, 1024] //It will make a list of values from 2 each time multiplies by 2
 //We use boxed() values we have in stream is primitive we need to box them in wrapper class
+
+
+-------Doing BigNumber Calculation with BigInteger------------------
+
+jshell> Integer.MAX_VALUE
+$1 ==> 2147483647   //Max value of integer
+
+jshell> Long.MAX_VALUE
+$2 ==> 9223372036854775807  //Max value of long
+
+jshell> IntStream.rangeClosed(1,50).reduce(1, (x,y) -> x*y )
+$3 ==> 0   //  O/P is 0 b/z it is exceeding maximum integer range
+
+jshell> LongStream.rangeClosed(1,50).reduce(1, (x,y) -> x*y )
+$4 ==> -3258495067890909184  //  O/P is negative b/z it is exceeding maximum integer range
+
+jshell> LongStream.rangeClosed(1,10).reduce(1, (x,y) -> x*y )
+$5 ==> 3628800
+
+jshell> LongStream.rangeClosed(1,20).reduce(1, (x,y) -> x*y )
+$6 ==> 2432902008176640000
+
+jshell> LongStream.rangeClosed(1,30).reduce(1, (x,y) -> x*y )
+$7 ==> -8764578968847253504
+
+jshell> LongStream.rangeClosed(1,50).mapToObj(BigInteger::valueOf).reduce(BigInteger.ONE, BigInteger::multiply )
+$8 ==> 30414093201713378043612608166064768844377641568960512000000000000 //By using BigInteger we can calculate value beyond range
+                                                                         //of int and Long
