@@ -188,7 +188,36 @@ public class FPO4CustomClass {
 			    .filter(reviewScoreGreaterThan95Predicate)
 		        .mapToInt(Course::getNoOfStudents) 
                .max());
+	   //OptionalInt[96000]
 	   
+	   System.out.println(
+			   courses.stream()
+			   .collect(Collectors.groupingBy(Course::getCategory)));
+	   //{Cloud=[Git:85000:99, Azure:96000:100], 
+	   //Frontend Framework=[Angular:18000:99],
+	   //Microservices=[API:30000:97],
+	   //Framework=[Spring:20000:98, Spring Boot:30000:96]}
+	   
+	   System.out.println(
+			   courses.stream()
+			   .collect(Collectors.groupingBy(Course::getCategory, Collectors.counting())));
+	   //{Cloud=2, Frontend Framework=1, Microservices=1, Framework=2}
+	   
+	   System.out.println(
+			   courses.stream()
+			   .collect(Collectors.groupingBy(Course::getCategory,
+					   Collectors.maxBy(Comparator.comparing(Course::getReviewScore)))));
+	   
+	   //{Cloud=Optional[Azure:96000:100], Frontend Framework=Optional[Angular:18000:99], Microservices=Optional[API:30000:97], Framework=Optional[Spring:20000:98]}
+
+	   System.out.println(
+			   courses.stream()
+			   .collect(Collectors.groupingBy(Course::getCategory,
+					   Collectors.mapping(Course::getName, Collectors.toList()))));
+	   //{Cloud=[Git, Azure], Frontend Framework=[Angular], Microservices=[API], Framework=[Spring, Spring Boot]}
+
+	
+
 	   
 	}
 
