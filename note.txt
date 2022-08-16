@@ -15,3 +15,30 @@
 		 Take the numbers, convert it into stream and for each element do a print 
 		
 		FPO1Functional::print == Method Reference
+		
+		
+		
+
+	-----Creating Streams using Streams of method and for Array------
+		
+jshell> List<Integer> numbers = List.of(12,9,13,4,6,2,4,12,15);
+numbers ==> [12, 9, 13, 4, 6, 2, 4, 12, 15]
+
+jshell> numbers.stream()
+$2 ==> java.util.stream.ReferencePipeline$Head@5ef04b5  //Reference pipeline is when we use wrapper classes or CCustom classes
+
+jshell> Stream.of(12, 9, 13, 4, 6, 2, 4, 12, 15).count() //We can create stream even directly
+$3 ==> 9
+
+
+jshell> Stream.of(12,9,13,4,6,2,4,12,15)
+$4 ==> java.util.stream.ReferencePipeline$Head@69663380
+
+jshell> int[] numberArray = {12,9,13,4,6,2,4,12,15};    //We can even create stream of an Array
+numberArray ==> int[9] { 12, 9, 13, 4, 6, 2, 4, 12, 15 }
+
+jshell> Arrays.stream(numberArray)
+$6 ==> java.util.stream.IntPipeline$Head@28c97a5 //Int pipeline when we use primitive int values 
+
+jshell> Arrays.stream(numberArray).sum()
+$7 ==> 77
