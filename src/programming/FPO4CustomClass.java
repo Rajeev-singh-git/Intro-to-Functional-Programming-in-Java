@@ -127,6 +127,39 @@ public class FPO4CustomClass {
 	   System.out.println(courses.stream()
 			   	  .dropWhile(course -> course.getReviewScore()<99)//Until this condition is true it will skip all the elements,  
 			      .collect(Collectors.toList()));                 // after that will print everything
+	   //[Angular:18000:99, Git:85000:99, Azure:96000:100]@
+	   
+	   
+	   System.out.println(courses.stream()
+			        .max(comparingByNoStudentsAndNoOfReviews)); //will print last element of this comparison result
+	    //Optional[Angular:18000:99]
+	   
+	   System.out.println(courses.stream()
+		        .min(comparingByNoStudentsAndNoOfReviews));//will print first element of this comparison result
+	   //Optional[Azure:96000:100]  //optional is a way to handle null value or null pointer exception
+	   
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreLessThan90Predicate)
+		        .min(comparingByNoStudentsAndNoOfReviews)
+		        .orElse(new Course("Kubernetes","Cloud",91,20000))
+		        );
+	     //Kubernetes:20000:91
+	   
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreLessThan90Predicate)
+		        .min(comparingByNoStudentsAndNoOfReviews));
+       //Optional.empty = When a value does not exist, it will not return null instead will return optional.empty
+	  
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .findFirst()
+		        );
+	   //Optional[Spring:20000:98]
+	   
+	   System.out.println(courses.stream()
+			    .filter(reviewScoreGreaterThan95Predicate)
+		        .findAny()
+		        );
 	   
 	}
 
