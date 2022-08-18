@@ -2,6 +2,7 @@ package programming;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class FPO2Functional {
 	
@@ -57,10 +58,18 @@ public class FPO2Functional {
 
 	private static int addListFunctional(List<Integer> numbers) {
 		// TODO Auto-generated method stub
+		
+		
 		return numbers.stream()
+				.parallel()
 			//	.reduce(0,FPO2Functional::sum);     //using user defined sum method
 			//	.reduce(0, (x,y) -> x+y);          //using Lambda
 				.reduce(0, Integer::sum);	       //using java inbuilt method 
+		
+		
+		
+		
+		
 		 
 	}
 
