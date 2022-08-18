@@ -215,10 +215,15 @@ public class FPO4CustomClass {
 			   .collect(Collectors.groupingBy(Course::getCategory,
 					   Collectors.mapping(Course::getName, Collectors.toList()))));
 	   //{Cloud=[Git, Azure], Frontend Framework=[Angular], Microservices=[API], Framework=[Spring, Spring Boot]}
-
-	
+	   
+	   Predicate<Course> reviewScoreGreaterThan95Predicate2 = createPredicateWithCutoffReviewScore(95);
+	   Predicate<Course> reviewScoreGreaterThan90Predicate2 = createPredicateWithCutoffReviewScore(90);;
 
 	   
+	}
+
+	private static Predicate<Course> createPredicateWithCutoffReviewScore(int cutoffReviewScore) {
+		return course -> course.getReviewScore()>cutoffReviewScore;  //We are returning a method from a method
 	}
 
 }
