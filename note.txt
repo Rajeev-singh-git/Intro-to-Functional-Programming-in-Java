@@ -201,7 +201,47 @@ and eliminating repeated string  also filtering same no of Character*/
 $5 ==> [[Spring, Spring], [Spring Boot, Spring Boot], [API, API], [Microservices, Microservices], [AWS, AWS], [PCF, PCF], [Azure, Azure], [Docker, Docker]]                                                                         
                                                                          
                                                                          
-                                                                         
+------------------------FP and Performance - Intermediate stream Operations are lazy---------------------------------------
+
+jshell> List<String> courses = List.of("Spring","Spring Boot","API", "Microservices" , "AWS", "PCF", "Azure" , "Docker" , "Kubernetes");
+courses ==> [Spring, Spring Boot, API, Microservices, AWS, PCF, Azure, Docker, Kubernetes]
+
+
+jshell> courses.stream().filter(courses -> courses.length()>11).map(String::toUpperCase).findFirst()
+$2 ==> Optional[MICROSERVICES]
+
+/* adding peek to see what is happening in background. Each course is being stream until it find course 
+with length greater than 11. It won't execute afterwards because it knows it only has to find first course */
+
+
+
+jshell> courses.stream().peek(System.out::println).filter(courses -> courses.length()>11) 
+.map(String::toUpperCase).peek(System.out::println).findFirst()
+Spring
+Spring Boot
+API
+Microservices
+MICROSERVICES
+$3 ==> Optional[MICROSERVICES]
+
+/* All the intermediate operation in java is lazy, they are not executed if we don't add terminal
+operation for execution. Here "findFirst" is terminal operation */
+
+jshell> courses.stream().peek(System.out::println).filter(courses -> courses.length()>11).map(String::toUpperCase).peek(System.out::println)
+$4 ==> java.util.stream.ReferencePipeline$15@736e9adb
+
+
+/* In Jshell if we return some value , it takes value and put it in variable. Here "$4" is variable created. so we can apply 
+operation on variable also"
+
+jshell> $4.findFirst()
+
+ Spring
+Spring Boot
+API
+Microservices
+MICROSERVICES
+$5 ==> Optional[MICROSERVICES]                                                                       
                                                                          
                                                                          
                                                                          
